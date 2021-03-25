@@ -1,0 +1,116 @@
+# Types of form questions
+#
+# shortAnswer
+# paragraph
+# multipleChoice
+# checkBoxes
+# dropDown
+# date
+# linearScale
+
+# Here you set the id of the first section the user should see.
+defaultSection: SectionID
+
+SectionID: # The section id must be unique
+
+  title: Pretty Name # If this is not included or set to null, it will use SectionID instead
+  description: >
+    Lorem ipsum dolor set amet
+    concecetur something something
+    I forgot the rest.
+
+  questions:
+    # Question names must be unique to other questions within its own section
+    -
+      name: Question
+      type: shortAnswer
+      # In this example, WeirdSection will be included if this question has an answer
+      include: WeirdSection # Specify the next section id
+
+    -
+      name: Question
+      type: paragraph
+      # In this example, ThisSection will be included if this question has an answer
+      include: ThisSection
+
+    -
+      name: Question
+      description: >
+        This is a very long description
+        that spans multiple lines and will
+        be interpreted as a string.
+      required: true
+      type: multipleChoice
+      options:
+        -
+          value: Option 1
+        -
+          value: Option 2
+          # In this example, selection this option will include the section OtherSection
+          include: OtherSection 
+
+        -
+          value: Option 3
+          include: # You can specify multiple sections to include
+            - ThatSection
+            - TheOtherSection
+
+        -
+          # This is to specify that this option is other,
+          # meaning the user can input their own value
+          other: true 
+          # This will set a custom placeholder value, default: Other...
+          value: custom placeholder text
+    
+    -
+      name: Question
+      type: checkBoxes
+
+      # If this value is not defined, it is by default 0 unless the question is required,
+      # in which case, it is 1.
+      minSelected: 0 
+
+      # If this value is not defined, the user can select as many options as they want.
+      maxSelected: 5
+
+      options:
+        # Options here work the exact same way as they do for multipleChoice
+        -
+          value: Option 1
+
+    -
+      name: Question
+      type: dropDown
+      options:
+        # Options here work the exact same way as they do for multipleChoice with one exception,
+        # you cannot set an `other` option here
+        -
+          value: Option 1
+
+    -
+      name: Question
+      type: linearScale
+
+      # min and max have to a whole number and min < max
+      minValue: 1
+      maxValue: 5
+
+      # You can set labels for the min and max values if you want.
+      minLabel: This is the minimum!
+      maxLabel: This is the maximum!
+
+    -
+      name: Question
+      type: date
+      
+      # You can specify the format that the date will appear
+      # For Example, assuming the date as March 24, 2021
+
+      format: mm/dd/yyyy      # 03/24/2021
+      format: mm/dd/yy        # 03/24/21
+      format: mm-dd-yy        # 03-24-21
+      format: MM dd, yyyy     # Mar 24, 2021
+      format: Month dd, yy    # March 24, 21
+
+# After the last section, (when there are no more sections left in the queue)
+# the submit button will be available
