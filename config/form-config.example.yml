@@ -1,10 +1,10 @@
 # Types of form questions
 #
 # shortAnswer
-# paragraph
-# multipleChoice
-# checkBoxes
-# dropDown
+# Paragraph
+# Radio
+# checkBox
+# Select
 # date
 # linearScale
 
@@ -29,7 +29,7 @@ SectionID: # The section id must be unique
 
     -
       name: Question
-      type: paragraph
+      type: Paragraph
       # In this example, ThisSection will be included if this question has an answer
       include: ThisSection
 
@@ -40,17 +40,20 @@ SectionID: # The section id must be unique
         that spans multiple lines and will
         be interpreted as a string.
       required: true
-      type: multipleChoice
+      type: Radio
       options:
         -
-          value: Option 1
+          title: Option 1
+          value: Option1
         -
-          value: Option 2
+          title: Option 2
+          value: Option2
           # In this example, selection this option will include the section OtherSection
           include: OtherSection 
 
         -
-          value: Option 3
+          title: Option 3
+          value: Option3
           include: # You can specify multiple sections to include
             - ThatSection
             - TheOtherSection
@@ -64,7 +67,7 @@ SectionID: # The section id must be unique
     
     -
       name: Question
-      type: checkBoxes
+      type: checkBox
 
       # If this value is not defined, it is by default 0 unless the question is required,
       # in which case, it is 1.
@@ -74,15 +77,15 @@ SectionID: # The section id must be unique
       maxSelected: 5
 
       options:
-        # Options here work the exact same way as they do for multipleChoice
+        # Options here work the exact same way as they do for Radio
         -
           value: Option 1
 
     -
       name: Question
-      type: dropDown
+      type: Select
       options:
-        # Options here work the exact same way as they do for multipleChoice with one exception,
+        # Options here work the exact same way as they do for Radio with one exception,
         # you cannot set an `other` option here
         -
           value: Option 1

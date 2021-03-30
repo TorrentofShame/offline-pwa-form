@@ -26,8 +26,16 @@
   ],
   "author": "Simon Weizman <simon@torrentofshame.com>",
   "dependencies": {
+    "bootstrap": "^4.6.0",
+    "jquery": "^3.6.0",
+    "popper.js": "^1.16.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
+    "redux-form": "^8.3.7",
+    "redux-offline": "^2.0.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
@@ -61,6 +69,7 @@
     "prop-types": "^15.7.2",
     "purgecss-webpack-plugin": "^4.0.3",
     "react-test-renderer": "^17.0.2",
+    "redux-logger": "^3.0.6",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",

@@ -1,0 +1,111 @@
+# Types of form questions
+#
+# ShortAnswer
+# Paragraph
+# Number
+# Radio
+# Select
+# CheckBox
+# Date
+# Range
+# Email
+# Phone
+
+# Here you set the id of the first section the user should see.
+---
+defaultSection: FirstSection
+
+FirstSection: # The section id must be unique
+
+  title: Pretty Name # If this is not included or set to null, it will use SectionID instead
+  description: >
+    Lorem ipsum dolor set amet
+    concecetur something something
+    I forgot the rest.
+  include:
+    - SecondSection
+
+  questions:
+
+  -
+    name: firstName
+    label: First Name
+    type: ShortAnswer
+    required: true
+
+  -
+    name: lastName
+    label: Last Name
+    type: ShortAnswer
+    required: true
+
+  -
+    name: age
+    label: Age
+    type: Number
+
+  -
+    name: radiotest
+    label: Select One
+    type: Radio
+    required: true
+    options:
+      -
+        title: Option 1
+        value: Option1
+
+      -
+        title: Option 2
+        value: Option2
+        include:
+          - ThirdSection
+
+  -
+    name: selecttest
+    label: Select...
+    type: Select
+    options:
+      -
+        title: Option 1
+        value: Option1
+
+      -
+        title: Option 2
+        value: Option2
+
+SecondSection:
+  title: Second Section
+  description: Description for the second one my dude.
+
+  questions:
+
+    -
+      name: anotherOne
+      label: Another One
+      type: ShortAnswer
+
+    -
+      name: checkboxtest
+      label: Test CheckBox
+      type: CheckBox
+
+      options:
+
+        -
+          title: Option 1
+          value: opt1
+
+        -
+          title: Option 2
+          value: opt2
+
+ThirdSection:
+  title: Third Section
+  description: Description for the second one my dude.
+
+  questions:
+
+    -
+      name: lastOne
+      label: Last One
+      type: ShortAnswer

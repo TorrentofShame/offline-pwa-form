@@ -3,3 +3,33 @@ main {
   align-items: center;
   justify-content: center;
 }
+
+.submit {
+  float: right;
+}
+
+.next {
+  @extend .submit;
+}
+
+input[required] + label:after {
+  content: "*";
+  color: red;
+}
+
+.inputDiv {
+  display: flex;
+  text-align: center;
+  align-items: flex-start;
+
+  input {
+    order: 2;
+  }
+
+  label {
+    order: 1;
+    padding-right: 5px;
+  }
+}
+
+

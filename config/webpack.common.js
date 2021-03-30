@@ -1,14 +1,12 @@
-const webpack = require("webpack");
 const manifest = require("./manifest");
 const { rootDir } = require("./utils");
 
 /* Plugins */
+const WorkboxPlugin = require("workbox-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackPwaManifest = require("webpack-pwa-manifest");
-
-const NODE_ENV = process.env.NODE_ENV;
 
 const babelLoader = {
   loader: "babel-loader",
@@ -56,6 +54,7 @@ module.exports = {
       },
       {
         test: /\.ya?ml$/,
+        type: "json",
         use: "yaml-loader"
       }
     ]
@@ -67,15 +66,16 @@ module.exports = {
       _app: rootDir("src/app"),
       _styles: rootDir("src/styles"),
       _pages: rootDir("src/pages"),
-      _config: rootDir("config")
+      _config: rootDir("config"),
+      _utils: rootDir("src/utils"),
+      _store: rootDir("src/store")
     }
   },
   plugins: [
-    //new webpack.DefinePlugin({
-    //"process.env": {
-    //NODE_ENV: JSON.stringify(NODE_ENV)
-    //}
-    //}),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true
+    }),
     new ESLintPlugin({
       extensions: ["js", "jsx"],
       files: ["src"],
@@ -83,7 +83,8 @@ module.exports = {
       emitWarning: true
     }),
     new HtmlWebpackPlugin({
-      template: rootDir("src/index.html")
+      template: rootDir("src/index.html"),
+      favicon: rootDir("src/assets/favicon.png")
     }),
     new WebpackPwaManifest({
       filename: "manifest.json",
